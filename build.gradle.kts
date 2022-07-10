@@ -6,14 +6,23 @@ plugins {
 }
 
 group = "com.joaomanaia"
-version = "1.0"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
+
+    // Kord Snapshots Repository (Optional):
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
+
+    implementation("dev.kord:kord-core:0.8.x-SNAPSHOT")
+
+    implementation("org.slf4j:slf4j-log4j12:1.7.36")
 }
 
 tasks.test {
