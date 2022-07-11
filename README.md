@@ -1,6 +1,10 @@
 # TinoniBot
 
-A useful bot for discord
+A useful bot for discord using Kord
+
+> **Warning**: This bot is under development
+
+To start use ``
 
 ## Commands
 
