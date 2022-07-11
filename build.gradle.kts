@@ -13,6 +13,7 @@ repositories {
 
     // Kord Snapshots Repository (Optional):
     maven("https://oss.sonatype.org/content/repositories/snapshots")
+    maven("https://maven.kotlindiscord.com/repository/maven-public/")
 }
 
 dependencies {
@@ -23,6 +24,11 @@ dependencies {
     implementation("dev.kord:kord-core:0.8.x-SNAPSHOT")
 
     implementation("org.slf4j:slf4j-log4j12:1.7.36")
+
+    implementation("com.kotlindiscord.kord.extensions:kord-extensions:1.5.5-SNAPSHOT")
+
+    implementation("org.apache.logging.log4j:log4j-api:2.18.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.18.0")
 }
 
 tasks.test {
