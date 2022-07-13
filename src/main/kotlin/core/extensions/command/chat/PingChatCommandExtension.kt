@@ -14,7 +14,7 @@ class PingChatCommandExtension : Extension() {
 
         chatCommand {
             name = "ping"
-            description = "Recebe a latência do bot"
+            description = "Recebe a latência do ${selfBot.mention}"
 
             action {
                 val latency = Clock.System.now() - message.timestamp

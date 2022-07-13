@@ -18,10 +18,12 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("io.mockk:mockk:1.12.4")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
 
-    implementation("dev.kord:kord-core:0.8.x-SNAPSHOT")
+    implementation("dev.kord:kord-core:0.8.0-M15")
 
     implementation("org.slf4j:slf4j-log4j12:1.7.36")
 
@@ -29,6 +31,13 @@ dependencies {
 
     implementation("org.apache.logging.log4j:log4j-api:2.18.0")
     implementation("org.apache.logging.log4j:log4j-core:2.18.0")
+
+    val koinVersion = "3.2.0"
+
+    // Koin Core features
+    implementation("io.insert-koin:koin-core:$koinVersion")
+
+    implementation("io.supabase:postgrest-kt:0.2.0")
 }
 
 tasks.test {
