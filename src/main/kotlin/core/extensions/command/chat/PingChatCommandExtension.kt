@@ -24,8 +24,6 @@ class PingChatCommandExtension : Extension() {
             action {
                 val latency = Clock.System.now() - message.timestamp
 
-                guild?.id?.value?.let { guildRepository.createGuildToDatabase(it.toLong()) }
-
                 message.reply {
                     content = "\uD83C\uDFD3 Pong! A latência do ${selfBot.mention} é ${latency.inWholeMilliseconds}ms."
                 }

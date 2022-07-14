@@ -22,16 +22,16 @@ This bot contains useful commands for moderation, utility or music.
 
 ### Chat Commands
 
-| Name | Command | Arguments | Description      |
-|------|---------|-----------|------------------|
-| Ping | !ping   |           | Get bot latency. |
+| Name | Command | Arguments | Description      | Permissions |
+|------|---------|-----------|------------------|-------------|
+| Ping | !ping   |           | Get bot latency. |             |
 
 ### Slash Commands
 
-| Name                 | Command                 | Arguments | Description                            |
-|----------------------|-------------------------|-----------|----------------------------------------|
-| UpdateWelcomeChannel | /update channel welcome | channel   | Updates welcome channel for new users. |
-| RemoveWelcomeChannel | /remove channel welcome |           | Remove welcome channel from database.  |
+| Name                 | Command                 | Arguments | Permissions    | Description                            |
+|----------------------|-------------------------|-----------|----------------|----------------------------------------|
+| UpdateWelcomeChannel | /update channel welcome | channel   | ManageChannels | Updates welcome channel for new users. |
+| RemoveWelcomeChannel | /remove channel welcome |           | ManageChannels | Remove welcome channel from database.  |
 
 ## Events
 
