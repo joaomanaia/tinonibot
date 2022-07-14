@@ -5,6 +5,8 @@ import kotlinx.datetime.Instant
 import core.extensions.command.chat.PingChatCommandExtension
 import core.extensions.command.slash.moderation.RemoveWelcomeChannelCommandExtension
 import core.extensions.command.slash.moderation.UpdateWelcomeChannelCommandExtension
+import core.extensions.events.moderation.GuildCreateEventExtension
+import core.extensions.events.moderation.GuildDeleteEventExtension
 import core.extensions.events.moderation.MemberJoinEventExtension
 import core.util.uri.toUri
 import dev.kord.gateway.Intent
@@ -51,6 +53,8 @@ suspend fun main(args: Array<String>) {
 
             // Events
             add(::MemberJoinEventExtension)
+            add(::GuildCreateEventExtension)
+            add(::GuildDeleteEventExtension)
         }
     }
 

@@ -18,4 +18,8 @@ interface GuildRepository {
         memberMention: String,
         guildName: String
     ): String
+
+    suspend fun createGuildToDatabase(guildId: Long)
+
+    suspend fun deleteGuildFromDatabase(guildId: Long)
 }

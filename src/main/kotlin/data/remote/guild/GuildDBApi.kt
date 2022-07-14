@@ -9,4 +9,6 @@ interface GuildDBApi {
     )
 
     suspend fun insertGuildToDB(guildDB: GuildDBDto)
+
+    suspend fun removeGuildFromDB(guildId: Long)
 }

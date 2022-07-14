@@ -36,4 +36,13 @@ class GuildDBApiImpl(
             .insert(guildDB)
             .execute()
     }
+
+    override suspend fun removeGuildFromDB(guildId: Long) {
+        databaseUtil
+            .postgrestClient
+            .from<GuildDBDto>("guilds")
+            .delete()
+            .eq(GuildDBDto::id, guildId)
+            .execute()
+    }
 }

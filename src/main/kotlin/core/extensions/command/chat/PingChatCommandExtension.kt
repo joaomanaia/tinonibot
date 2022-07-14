@@ -3,9 +3,14 @@ package core.extensions.command.chat
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.extensions.chatCommand
 import dev.kord.core.behavior.reply
+import domain.repository.guild.GuildRepository
+import kotlinx.coroutines.coroutineScope
 import kotlinx.datetime.Clock
+import org.koin.core.component.inject
 
 class PingChatCommandExtension : Extension() {
+    private val guildRepository: GuildRepository by inject()
+
     override val name: String
         get() = "ping"
 
@@ -18,6 +23,8 @@ class PingChatCommandExtension : Extension() {
 
             action {
                 val latency = Clock.System.now() - message.timestamp
+
+                guild?.id?.value?.let { guildRepository.createGuildToDatabase(it.toLong()) }
 
                 message.reply {
                     content = "\uD83C\uDFD3 Pong! A latência do ${selfBot.mention} é ${latency.inWholeMilliseconds}ms."

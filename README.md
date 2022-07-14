@@ -10,7 +10,8 @@ A useful bot for discord using Kord
 
 Arguments to run this bot, in this order:
 - Discord bot token
-- Supabase uri
+- Supabase project url: 
+> You need to put this at the end of the project url `/rest/v1/`
 - Supabase api key
 
 If you don't provide these arguments the bot will not start.
@@ -36,6 +37,8 @@ This bot contains useful commands for moderation, utility or music.
 
 This bot contains useful events for moderation.
 
-| Name            | Description                                        |
-|-----------------|----------------------------------------------------|
-| MemberJoinEvent | Sends a welcome message to the configured channel. |
+| Name             | Description                                          |
+|------------------|------------------------------------------------------|
+| MemberJoinEvent  | Sends a welcome message to the configured channel.   |
+| GuildCreateEvent | When bot joins a guild, adds guild to database.      |
+| GuildDeleteEvent | When bot exist a guild, removes guild from database. |

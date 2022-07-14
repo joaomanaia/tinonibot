@@ -35,7 +35,7 @@ class MemberJoinEventExtension : Extension() {
                         .getChannelOf<TextChannel>(welcomeChannelId)
                         .createMessage(welcomeMessage)
                 } catch (e: Exception) {
-                    kordLogger.error(e.localizedMessage)
+                    kordLogger.error("MemberJoinEvent: ${e.localizedMessage}")
                 }
             }
         }

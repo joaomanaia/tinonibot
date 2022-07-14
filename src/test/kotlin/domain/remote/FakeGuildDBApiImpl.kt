@@ -24,4 +24,8 @@ class FakeGuildDBApiImpl : GuildDBApi {
     override suspend fun insertGuildToDB(guildDB: GuildDBDto) {
         guilds.add(guildDB)
     }
+
+    override suspend fun removeGuildFromDB(guildId: Long) {
+        guilds.removeAll { it.id == guildId }
+    }
 }
