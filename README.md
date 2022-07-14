@@ -1,6 +1,6 @@
 # TinoniBot
 
-A useful bot for discord using Kord
+A useful bot for discord using Kord, Kordex and supabase for database.
 
 > **Warning**: This bot is under development
 
@@ -22,9 +22,9 @@ This bot contains useful commands for moderation, utility or music.
 
 ### Chat Commands
 
-| Name | Command | Arguments | Description      | Permissions |
-|------|---------|-----------|------------------|-------------|
-| Ping | !ping   |           | Get bot latency. |             |
+| Name | Command | Arguments | Permissions | Description      |
+|------|---------|-----------|-------------|------------------|
+| Ping | !ping   |           |             | Get bot latency. |
 
 ### Slash Commands
 
