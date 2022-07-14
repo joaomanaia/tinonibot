@@ -25,13 +25,6 @@ class GuildRepositoryImpl(
         guildDBApi.updateWelcomeMessageChannel(guildId, null)
     }
 
-    override suspend fun getWelcomeMessageForMember(
-        memberMention: String,
-        guildName: String
-    ): String {
-        return "Welcome $memberMention to server $guildName!"
-    }
-
     override suspend fun createGuildToDatabase(guildId: Long) {
         val guildDBDto = GuildDBDto(
             id = guildId,

@@ -56,21 +56,24 @@ class UpdateWelcomeChannelCommandExtension : Extension() {
     private suspend fun PublicSlashCommand<UpdateWelcomeChannelArguments>.updateWelcomeChannelAction() {
         action {
             try {
-                val member = member?.asMember() ?: throw NullPointerException("Member is null")
+                val member = member?.asMember() ?: throw NullPointerException(translationsProvider.get("null_values.member"))
 
                 if (!member.hasPermission(Permission.ManageChannels))
-                    throw RuntimeException("User does not have manage channels permission for this command!")
+                    throw RuntimeException(translationsProvider.get("user_does_not_have_permission.manage_channels"))
 
-                val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException("Guild is null")
+                val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException(translationsProvider.get("null_values.guild"))
                 val channel = arguments.channel
 
                 if (channel.type != ChannelType.GuildText)
-                    throw IllegalArgumentException("Channel must be text channel")
+                    throw IllegalArgumentException(translationsProvider.get("channel.error.text_channel"))
 
                 guildRepository.updateWelcomeMessageChannel(guildId, channel.id)
 
                 respond {
-                    content = "Welcome channel updated to ${arguments.channel.mention}!"
+                    content = translationsProvider.translate(
+                        key = "core.extensions.command.slash.moderation.update_welcome_channel.welcome_channel_updated_to",
+                        replacements = arrayOf(arguments.channel.mention)
+                    )
                 }
             } catch (e: Exception) {
                 kordLogger.error("UpdateWelcomeChannel: ${e.localizedMessage}")

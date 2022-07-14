@@ -48,6 +48,8 @@ suspend fun main(args: Array<String>) {
         i18n {
             interactionUserLocaleResolver()
             interactionGuildLocaleResolver()
+
+            defaultLocale = SupportedLocales.ENGLISH
         }
 
         extensions {

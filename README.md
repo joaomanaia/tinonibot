@@ -42,3 +42,10 @@ This bot contains useful events for moderation.
 | MemberJoinEvent  | Sends a welcome message to the configured channel.   |
 | GuildCreateEvent | When bot joins a guild, adds guild to database.      |
 | GuildDeleteEvent | When bot exist a guild, removes guild from database. |
+
+# Translations
+
+This bot can be translated to these languages:
+
+- English (Default)
+- Portuguese
