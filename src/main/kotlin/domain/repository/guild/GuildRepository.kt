@@ -14,11 +14,6 @@ interface GuildRepository {
 
     suspend fun removeWelcomeMessageChannel(guildId: Long)
 
-    suspend fun getWelcomeMessageForMember(
-        memberMention: String,
-        guildName: String
-    ): String
-
     suspend fun createGuildToDatabase(guildId: Long)
 
     suspend fun deleteGuildFromDatabase(guildId: Long)

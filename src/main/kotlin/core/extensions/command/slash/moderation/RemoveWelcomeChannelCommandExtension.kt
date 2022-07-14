@@ -21,34 +21,34 @@ class RemoveWelcomeChannelCommandExtension : Extension() {
     override suspend fun setup() {
         publicSlashCommand {
             name = "remove"
-            description = "Commands for removing"
+            description = translationsProvider.get("core.extensions.command.slash.moderation.remove_welcome_channel.remove_command.description")
 
             //TODO: Remove in production
             guild(Common.TEST_GUILD_ID)
 
             group("channel") {
-                description = "Commands for removing channels from database"
+                description = translationsProvider.get("core.extensions.command.slash.moderation.remove_welcome_channel.group_channel.description")
 
                 publicSubCommand {
                     name = "welcome"
-                    description = "Remove welcome channel from database"
+                    description = translationsProvider.get("core.extensions.command.slash.moderation.remove_welcome_channel.remove_welcome_channel.description")
 
                     requirePermission(Permission.ManageChannels)
                     allowInDms = false
 
                     action {
                         try {
-                            val member = member?.asMember() ?: throw NullPointerException("Member is null")
+                            val member = member?.asMember() ?: throw NullPointerException(translationsProvider.get("null_values.member"))
 
                             if (!member.hasPermission(Permission.ManageChannels))
-                                throw RuntimeException("User does not have manage channels permission for this command!")
+                                throw RuntimeException(translationsProvider.get("user_does_not_have_permission.manage_channels"))
 
-                            val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException("Guild is null")
+                            val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException(translationsProvider.get("null_values.guild"))
 
                             guildRepository.removeWelcomeMessageChannel(guildId)
 
                             respond {
-                                content = "Welcome channel removed!"
+                                content = translationsProvider.get("core.extensions.command.slash.moderation.remove_welcome_channel.content")
                             }
                         } catch (e: Exception) {
                             kordLogger.error("RemoveWelcomeChannel: ${e.localizedMessage}")

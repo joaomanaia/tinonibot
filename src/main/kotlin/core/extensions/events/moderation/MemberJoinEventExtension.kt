@@ -28,7 +28,10 @@ class MemberJoinEventExtension : Extension() {
 
                     val guildName = member.guild.asGuildOrNull()?.name.orEmpty()
 
-                    val welcomeMessage = guildRepository.getWelcomeMessageForMember(member.mention, guildName)
+                    val welcomeMessage = translationsProvider.translate(
+                        key = "core.extensions.events.moderation.member_join_event.member_joined_message",
+                        replacements = arrayOf(member.mention, guildName)
+                    )
 
                     event
                         .guild

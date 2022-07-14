@@ -67,20 +67,4 @@ internal class GuildRepositoryImplTest {
             actual = guildDBApi.getGuildDB(0).welcomeMessageChannelId
         )
     }
-
-    @Test
-    fun `get welcome message for member`() = runTest {
-        val guildDBApi = mockk<GuildDBApi>(relaxed = true)
-        val guildRepository = GuildRepositoryImpl(guildDBApi)
-
-        val welcomeMessageChannel = guildRepository.getWelcomeMessageForMember(
-            memberMention = "tinoni",
-            guildName = "Tinoni"
-        )
-
-        assertEquals(
-            expected = "Welcome tinoni to server Tinoni!",
-            actual = welcomeMessageChannel
-        )
-    }
 }

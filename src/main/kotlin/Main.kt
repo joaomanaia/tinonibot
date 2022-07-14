@@ -1,4 +1,5 @@
 import com.kotlindiscord.kord.extensions.ExtensibleBot
+import com.kotlindiscord.kord.extensions.i18n.SupportedLocales
 import dev.kord.common.entity.PresenceStatus
 import dev.kord.gateway.PrivilegedIntent
 import kotlinx.datetime.Instant
@@ -9,6 +10,7 @@ import core.extensions.events.moderation.GuildCreateEventExtension
 import core.extensions.events.moderation.GuildDeleteEventExtension
 import core.extensions.events.moderation.MemberJoinEventExtension
 import core.util.uri.toUri
+import dev.kord.common.Locale
 import dev.kord.gateway.Intent
 import di.guildDBRepositoryModule
 import di.getDatabaseModule
@@ -41,6 +43,13 @@ suspend fun main(args: Array<String>) {
 
         chatCommands {
             enabled = true
+        }
+
+        i18n {
+            interactionUserLocaleResolver()
+            interactionGuildLocaleResolver()
+
+            defaultLocale = SupportedLocales.ENGLISH
         }
 
         extensions {
