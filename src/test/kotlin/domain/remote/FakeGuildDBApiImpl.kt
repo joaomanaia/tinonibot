@@ -1,5 +1,8 @@
 package domain.remote
 
+import core.util.data.merge
+import data.mappers.toGuildDBDto
+import data.mappers.toMap
 import data.remote.guild.GuildDBApi
 import data.remote.guild.GuildDBDto
 
@@ -12,13 +15,30 @@ class FakeGuildDBApiImpl : GuildDBApi {
         } ?: throw NullPointerException("Guild not found")
     }
 
-    override suspend fun updateWelcomeMessageChannel(guildId: Long, channelId: Long?) {
-        val guildDBDtoIndex = guilds.indexOfFirst { guild -> guild.id == guildId }
-        val guildDBDto = GuildDBDto(
-            id = guildId,
-            welcomeMessageChannelId = channelId
-        )
-        guilds[guildDBDtoIndex] = guildDBDto
+    override suspend fun updateChannelData(guildId: Long, data: Map<String, Any?>) {
+        val currentGuildDTO = guilds.find { guild -> guild.id == guildId }
+
+        if (currentGuildDTO != null) {
+            val guildDBDto = currentGuildDTO merge data.toGuildDBDto()
+
+            val guildDBDtoIndex = guilds.indexOfFirst { guild -> guild.id == guildId }
+            guilds[guildDBDtoIndex] = guildDBDto
+        }
+    }
+
+    override suspend fun updateChannelFieldData(fieldName: String, guildId: Long, channelId: Long?) {
+        val currentGuildDTO = guilds.find { guild -> guild.id == guildId }
+
+        currentGuildDTO
+            ?.toMap()
+            ?.toMutableMap()
+            ?.apply {
+                this[fieldName] = channelId
+            }?.toGuildDBDto()
+            ?.also { currentGuildDTOUpdated ->
+                val guildDBDtoIndex = guilds.indexOfFirst { guild -> guild.id == guildId }
+                guilds[guildDBDtoIndex] = currentGuildDTOUpdated
+            }
     }
 
     override suspend fun insertGuildToDB(guildDB: GuildDBDto) {

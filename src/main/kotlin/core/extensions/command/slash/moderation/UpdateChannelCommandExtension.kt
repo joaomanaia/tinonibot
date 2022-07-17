@@ -13,19 +13,29 @@ import core.common.Common
 import dev.kord.common.entity.ChannelType
 import dev.kord.common.entity.Permission
 import dev.kord.core.kordLogger
-import domain.repository.guild.GuildRepository
+import domain.repository.guild.channel.VerifyMemberRepository
+import domain.repository.guild.channel.WelcomeMemberRepository
 import org.koin.core.component.inject
 
-class UpdateWelcomeChannelCommandExtension : Extension() {
-    private val guildRepository: GuildRepository by inject()
+class UpdateChannelCommandExtension : Extension() {
+    private val welcomeMemberRepository: WelcomeMemberRepository by inject()
+
+    private val verifyMemberRepository: VerifyMemberRepository by inject()
 
     override val name: String
-        get() = "updateWelcomeChannel"
+        get() = "updateChannel"
 
     inner class UpdateWelcomeChannelArguments : Arguments() {
-        val channel by channel {
-            name = "channel"
-            description = "Channel to receive welcome messages"
+        val welcomeChannel by channel {
+            name = "welcome"
+            description = "Welcome channel to new members"
+        }
+    }
+
+    inner class UpdateVerificationChannelArguments : Arguments() {
+        val verificationChannel by channel {
+            name = "verification"
+            description = "Channel to verify new members"
         }
     }
 
@@ -49,6 +59,16 @@ class UpdateWelcomeChannelCommandExtension : Extension() {
 
                     updateWelcomeChannelAction()
                 }
+
+                publicSubCommand(::UpdateVerificationChannelArguments) {
+                    name = "verification"
+                    description = "Update verification channel to database"
+
+                    requirePermission(Permission.ManageChannels)
+                    allowInDms = false
+
+                    action {  }
+                }
             }
         }
     }
@@ -62,17 +82,17 @@ class UpdateWelcomeChannelCommandExtension : Extension() {
                     throw RuntimeException(translationsProvider.get("user_does_not_have_permission.manage_channels"))
 
                 val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException(translationsProvider.get("null_values.guild"))
-                val channel = arguments.channel
+                val channel = arguments.welcomeChannel
 
                 if (channel.type != ChannelType.GuildText)
                     throw IllegalArgumentException(translationsProvider.get("channel.error.text_channel"))
 
-                guildRepository.updateWelcomeMessageChannel(guildId, channel.id)
+                welcomeMemberRepository.updateChannel(guildId, channel.id)
 
                 respond {
                     content = translationsProvider.translate(
                         key = "core.extensions.command.slash.moderation.update_welcome_channel.welcome_channel_updated_to",
-                        replacements = arrayOf(arguments.channel.mention)
+                        replacements = arrayOf(arguments.welcomeChannel.mention)
                     )
                 }
             } catch (e: Exception) {

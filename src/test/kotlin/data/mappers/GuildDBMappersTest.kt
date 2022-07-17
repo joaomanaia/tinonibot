@@ -11,7 +11,9 @@ internal class GuildDBMappersTest {
     fun `guildDBDto to guildDB test`() {
         val guildDBDto = GuildDBDto(
             id = 0,
-            welcomeMessageChannelId = 1
+            welcomeMessageChannelId = 1,
+            verificationChannelId = 2,
+            verifiedRoleId = 3
         )
 
         val guildDB = guildDBDto.toGuildDB()
@@ -19,7 +21,9 @@ internal class GuildDBMappersTest {
         assertEquals(
             expected = GuildDB(
                 id = Snowflake(0),
-                welcomeMessageChannelId = Snowflake(1)
+                welcomeMessageChannelId = Snowflake(1),
+                verificationChannelId = Snowflake(2),
+                verifiedRoleId = Snowflake(3)
             ),
             actual = guildDB
         )
@@ -29,7 +33,9 @@ internal class GuildDBMappersTest {
     fun `guildDBDto to guildDB, welcomeMessageChannelId null value test`() {
         val guildDBDto = GuildDBDto(
             id = 0,
-            welcomeMessageChannelId = null
+            welcomeMessageChannelId = null,
+            verificationChannelId = null,
+            verifiedRoleId = null
         )
 
         val guildDB = guildDBDto.toGuildDB()
@@ -37,7 +43,9 @@ internal class GuildDBMappersTest {
         assertEquals(
             expected = GuildDB(
                 id = Snowflake(0),
-                welcomeMessageChannelId = null
+                welcomeMessageChannelId = null,
+                verificationChannelId = null,
+                verifiedRoleId = null
             ),
             actual = guildDB
         )
@@ -47,7 +55,9 @@ internal class GuildDBMappersTest {
     fun `guildDB to guildDBDTO test`() {
         val guildDB = GuildDB(
             id = Snowflake(0),
-            welcomeMessageChannelId = Snowflake(1)
+            welcomeMessageChannelId = Snowflake(1),
+            verificationChannelId = Snowflake(2),
+            verifiedRoleId = Snowflake(3)
         )
 
         val guildDBDTO = guildDB.toGuildDBDTO()
@@ -55,7 +65,9 @@ internal class GuildDBMappersTest {
         assertEquals(
             expected = GuildDBDto(
                 id = 0,
-                welcomeMessageChannelId = 1
+                welcomeMessageChannelId = 1,
+                verificationChannelId = 2,
+                verifiedRoleId = 3
             ),
             actual = guildDBDTO
         )
@@ -65,7 +77,9 @@ internal class GuildDBMappersTest {
     fun `guildDB to guildDBDTO, welcomeMessageChannelId null value test`() {
         val guildDB = GuildDB(
             id = Snowflake(0),
-            welcomeMessageChannelId = null
+            welcomeMessageChannelId = null,
+            verificationChannelId = null,
+            verifiedRoleId = null
         )
 
         val guildDBDTO = guildDB.toGuildDBDTO()
@@ -73,7 +87,9 @@ internal class GuildDBMappersTest {
         assertEquals(
             expected = GuildDBDto(
                 id = 0,
-                welcomeMessageChannelId = null
+                welcomeMessageChannelId = null,
+                verificationChannelId = null,
+                verifiedRoleId = null
             ),
             actual = guildDBDTO
         )

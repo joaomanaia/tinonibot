@@ -18,15 +18,22 @@ class GuildDBApiImpl(
             .executeAndGetSingle()
     }
 
-    override suspend fun updateWelcomeMessageChannel(guildId: Long, channelId: Long?) {
-        val updateData = mapOf(GuildDBDto::welcomeMessageChannelId.name to channelId)
-
+    private fun updateChannel(guildId: Long, updateData: Map<String, Any?>) {
         databaseUtil
             .postgrestClient
             .from<GuildDBDto>("guilds")
             .update(updateData)
             .eq(GuildDBDto::id, guildId)
             .execute()
+    }
+
+    override suspend fun updateChannelData(guildId: Long, data: Map<String, Any?>) {
+        updateChannel(guildId = guildId, updateData = data)
+    }
+
+    override suspend fun updateChannelFieldData(fieldName: String, guildId: Long, channelId: Long?) {
+        val updateData = mapOf(fieldName to channelId)
+        updateChannel(guildId = guildId, updateData = updateData)
     }
 
     override suspend fun insertGuildToDB(guildDB: GuildDBDto) {

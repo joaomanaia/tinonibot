@@ -2,17 +2,15 @@ package core.extensions.events.moderation
 
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.extensions.event
-import core.common.Common
-import dev.kord.common.entity.Snowflake
 import dev.kord.core.behavior.getChannelOf
 import dev.kord.core.entity.channel.TextChannel
 import dev.kord.core.event.guild.MemberJoinEvent
 import dev.kord.core.kordLogger
-import domain.repository.guild.GuildRepository
+import domain.repository.guild.channel.WelcomeMemberRepository
 import org.koin.core.component.inject
 
 class MemberJoinEventExtension : Extension() {
-    private val guildRepository: GuildRepository by inject()
+    private val welcomeMemberRepository: WelcomeMemberRepository by inject()
 
     override val name: String
         get() = "memberJoinEvent"
@@ -22,7 +20,7 @@ class MemberJoinEventExtension : Extension() {
             action {
                 try {
                     val guildId = event.guildId.value.toLong()
-                    val welcomeChannelId = guildRepository.getWelcomeMessageChannel(guildId)
+                    val welcomeChannelId = welcomeMemberRepository.getChannelId(guildId)
 
                     val member = event.member
 

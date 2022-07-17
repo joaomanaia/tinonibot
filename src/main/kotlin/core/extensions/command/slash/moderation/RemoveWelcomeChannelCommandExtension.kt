@@ -9,11 +9,11 @@ import com.kotlindiscord.kord.extensions.utils.hasPermission
 import core.common.Common
 import dev.kord.common.entity.Permission
 import dev.kord.core.kordLogger
-import domain.repository.guild.GuildRepository
+import domain.repository.guild.channel.WelcomeMemberRepository
 import org.koin.core.component.inject
 
 class RemoveWelcomeChannelCommandExtension : Extension() {
-    private val guildRepository: GuildRepository by inject()
+    private val welcomeMemberRepository: WelcomeMemberRepository by inject()
 
     override val name: String
         get() = "removeWelcomeChannel"
@@ -45,7 +45,7 @@ class RemoveWelcomeChannelCommandExtension : Extension() {
 
                             val guildId = guild?.id?.value?.toLong() ?: throw NullPointerException(translationsProvider.get("null_values.guild"))
 
-                            guildRepository.removeWelcomeMessageChannel(guildId)
+                            welcomeMemberRepository.removeChannel(guildId)
 
                             respond {
                                 content = translationsProvider.get("core.extensions.command.slash.moderation.remove_welcome_channel.content")

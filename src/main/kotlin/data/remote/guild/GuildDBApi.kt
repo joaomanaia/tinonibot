@@ -3,7 +3,13 @@ package data.remote.guild
 interface GuildDBApi {
     suspend fun getGuildDB(id: Long): GuildDBDto
 
-    suspend fun updateWelcomeMessageChannel(
+    suspend fun updateChannelData(
+        guildId: Long,
+        data: Map<String, Any?>
+    )
+
+    suspend fun updateChannelFieldData(
+        fieldName: String,
         guildId: Long,
         channelId: Long?
     )

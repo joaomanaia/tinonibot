@@ -23,6 +23,8 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
 
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
+
     implementation("dev.kord:kord-core:0.8.0-M15")
 
     implementation("org.slf4j:slf4j-log4j12:1.7.36")

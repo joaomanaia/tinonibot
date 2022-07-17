@@ -16,11 +16,7 @@ class PingChatCommandExtension : Extension() {
             name = "ping"
             description = translationsProvider.translate(key = "core.extensions.command.chat.ping_chat_command.description", replacements = arrayOf(selfBot.mention))
 
-
             action {
-                val locale = getLocale()
-                println(locale.toString())
-
                 val latency = Clock.System.now() - message.timestamp
                 message.reply {
                     content = translationsProvider.translate(
